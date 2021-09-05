@@ -1,37 +1,35 @@
 import {
   Box,
   Flex,
-  Text,
+  useMediaQuery,
+  Image,
   IconButton,
   Button,
   Stack,
   Collapse,
-  useColorModeValue,
-  useBreakpointValue,
+  Link,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
 import { MobileNav } from "./MobileNav";
 import { DesktopNav } from "./DesktopNav";
 
-export const Header: React.FC = () => {
-  const { isOpen, onToggle } = useDisclosure();
+const Header: React.FC = () => {
+    const [isLargerThan] = useMediaQuery("(min-width: 500px)");
 
+  const { isOpen, onToggle } = useDisclosure();
   return (
     <Box>
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
-        minH={"60px"}
+        bg="gray.900"
+        color="white"
+        minH={"8vh"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor="gray.900"
         align={"center"}
       >
         <Flex
@@ -48,16 +46,21 @@ export const Header: React.FC = () => {
             aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Text
-            textAlign={useBreakpointValue({ base: "center", md: "left" })}
-            fontFamily={"heading"}
-            color={useColorModeValue("gray.800", "white")}
+        <Flex flex={{ base: 2 }} justify={{ base: "center", md: "start" }}>
+          <Link href="/">
+            <Image
+              h="39px"
+              src="http://www.premiercorporatelimo.com/img/logo.png"
+              paddingLeft={isLargerThan ? "20px" : "0px"}
+            />
+          </Link>
+          <Flex
+            display={{ base: "none", md: "flex" }}
+            ml={10}
+            alignItems="center"
+            justifyContent="center"
+            paddingLeft="30px"
           >
-            Logo
-          </Text>
-
-          <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
@@ -68,28 +71,20 @@ export const Header: React.FC = () => {
           direction={"row"}
           spacing={6}
         >
-          <Button
-            as={"a"}
-            fontSize={"sm"}
-            fontWeight={400}
-            variant={"link"}
-            href={"#"}
-          >
-            Sign In
-          </Button>
-          <Button
-            display={{ base: "none", md: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"blue.400"}
-            href={"#"}
-            _hover={{
-              bg: "blue.300",
-            }}
-          >
-            Sign Up
-          </Button>
+          <Link href="/signin">
+            <Button
+              fontSize={"sm"}
+              fontWeight={600}
+              bg={isLargerThan ? "blue.600" : ""}
+              color={"white"}
+              href={"/signin"}
+              _hover={{
+                bg: "blue.500",
+              }}
+            >
+              Sign In
+            </Button>
+          </Link>
         </Stack>
       </Flex>
 
@@ -99,3 +94,5 @@ export const Header: React.FC = () => {
     </Box>
   );
 }
+
+export default Header

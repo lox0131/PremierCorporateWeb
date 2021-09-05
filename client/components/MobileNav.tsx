@@ -5,28 +5,29 @@ import {
   Collapse,
   Icon,
   Link,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import {
   ChevronDownIcon,
 } from "@chakra-ui/icons";
+import { NavItems } from "../Utils/NavItems"
+import { INavItem } from "../interfaces/NavItems"
 
 export const MobileNav: React.FC = () => {
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg="gray.900"
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map((navItem) => (
+      {NavItems.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
   );
 };
 
-export const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
+export const MobileNavItem: React.FC<INavItem> = ({ label, children, href }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -41,15 +42,13 @@ export const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
           textDecoration: "none",
         }}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
+        <Text fontWeight={600} color="gray.200">
           {label}
         </Text>
         {children && (
           <Icon
             as={ChevronDownIcon}
+            color="gray.200"
             transition={"all .25s ease-in-out"}
             transform={isOpen ? "rotate(180deg)" : ""}
             w={6}
@@ -63,8 +62,9 @@ export const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
           mt={2}
           pl={4}
           borderLeft={1}
+          color="gray.200"
           borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderColor="gray.700"
           align={"start"}
         >
           {children &&
@@ -78,52 +78,3 @@ export const MobileNavItem: React.FC<NavItem> = ({ label, children, href }) => {
     </Stack>
   );
 };
-
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
-    label: "Hire Designers",
-    href: "#",
-  },
-];
-

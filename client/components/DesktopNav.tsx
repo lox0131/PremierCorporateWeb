@@ -5,27 +5,26 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  useColorModeValue,
+ 
 } from "@chakra-ui/react";
+import { v4 as uuidv4 } from "uuid";
 import { DesktopSubNav } from "./DesktopSubNav";
-
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
+import { NavItems } from "../Utils/NavItems";
 
 export const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
+  const linkColor =  "gray.200"
+  const linkHoverColor = "white"
+  const popoverContentBgColor =  "gray.800"
 
   return (
     <Stack direction={"row"} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={"hover"} placement={"bottom-start"}>
+      {NavItems.map((navItem) => (
+        <Box key={uuidv4()}>
+          <Popover
+            trigger={"hover"}
+            placement={"bottom-start"}
+            id={navItem.label}
+          >
             <PopoverTrigger>
               <Link
                 p={2}
@@ -65,44 +64,5 @@ export const DesktopNav = () => {
   );
 };
 
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
-    label: "Hire Designers",
-    href: "#",
-  },
-];
+
 
