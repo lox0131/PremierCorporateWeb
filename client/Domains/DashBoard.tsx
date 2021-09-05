@@ -5,7 +5,7 @@ interface Props {}
 const DashBoard = (props: Props) => {
   const [isLargerThan] = useMediaQuery("(min-width: 500px)");
   return (
-    <Flex minW="100vw" minH="92vh" bg="gray.900">
+    <Flex minW="100vw" minH={isLargerThan ? "92vh" : "89vh"}bg="gray.900">
       <Flex
         w="100vw"
         h={isLargerThan ? "35vh" : "45vh"}

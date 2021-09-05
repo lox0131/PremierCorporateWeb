@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <Flex
         bg="gray.900"
         color="white"
-        minH={"8vh"}
+        minH={isLargerThan ? "8vh" : "11vh"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
