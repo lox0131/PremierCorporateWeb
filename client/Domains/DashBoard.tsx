@@ -9,7 +9,7 @@ const DashBoard: React.FC<Props> = () => {
     <Flex minW="100vw" minH={isLargerThan ? "91vh" : "89vh"} bg="gray.800" flexDirection="column" position="relative">
       <Flex
         w="100vw"
-        h={isLargerThan ? "35vh" : "45vh"}
+        h="45vh"
         justifyContent="center"
         alignItems="center"
         bgImage="Webp.net-resizeimage.jpg"

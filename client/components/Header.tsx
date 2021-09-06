@@ -8,15 +8,24 @@ import {
   Stack,
   Collapse,
   Link,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Avatar,
+  MenuDivider,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import firebase from "../firebase/clientApp";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import { MobileNav } from "./MobileNav";
 import { DesktopNav } from "./DesktopNav";
 
 const Header: React.FC = () => {
     const [isLargerThan] = useMediaQuery("(min-width: 500px)");
+     const [user] = useAuthState(firebase.auth());
 
   const { isOpen, onToggle } = useDisclosure();
   return (
@@ -72,20 +81,42 @@ const Header: React.FC = () => {
           direction={"row"}
           spacing={6}
         >
-          <Link href="/signin">
-            <Button
-              fontSize={"sm"}
-              fontWeight={600}
-              bg={isLargerThan ? "blue.400" : ""}
-              color={"white"}
-              href={"/signin"}
-              _hover={{
-                bg: "blue.500",
-              }}
+          <Menu>
+            <MenuButton
+              as={Button}
+              rounded={"full"}
+              variant={"link"}
+              cursor={"pointer"}
+              minW={0}
             >
-              Sign In
-            </Button>
-          </Link>
+              {user && user.photoURL ? (
+                <Avatar size={"md"} src={`${user?.photoURL}`} />
+              ) : (
+                <Avatar size={"md"} src={""} />
+              )}
+            </MenuButton>
+            <MenuList>
+              {user ? (
+                <>
+                  <Link href="/drinks">
+                    <MenuItem>View Reservations</MenuItem>
+                  </Link>
+                  <MenuDivider />
+                </>
+              ) : (
+                <> </>
+              )}
+              {!user ? (
+                <Link href="/signin">
+                  <MenuItem>Log In</MenuItem>
+                </Link>
+              ) : (
+                <MenuItem onClick={() => firebase.auth().signOut()}>
+                  Log Out
+                </MenuItem>
+              )}
+            </MenuList>
+          </Menu>
         </Stack>
       </Flex>
 
