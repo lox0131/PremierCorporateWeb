@@ -1,8 +1,15 @@
 import { INavItem } from "../interfaces/NavItems";
+import { RiServiceFill } from "react-icons/ri";
+import { FaCar } from "react-icons/fa"
+import { AiOutlineSchedule } from "react-icons/ai";
+ let icon1 = RiServiceFill;
+ let icon2 = FaCar;
+ let icon3 = AiOutlineSchedule;
 
 export const NavItems: Array<INavItem> = [
   {
     label: "Services",
+    icon: icon1,
     children: [
       {
         label: "Services",
@@ -18,6 +25,7 @@ export const NavItems: Array<INavItem> = [
   },
   {
     label: "Fleet",
+    icon: icon2,
     children: [
       {
         label: "Job Board",
@@ -33,6 +41,7 @@ export const NavItems: Array<INavItem> = [
   },
   {
     label: "Reservations",
+    icon: icon3,
     children: [
       {
         label: "Job Board",

@@ -5,16 +5,14 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
- 
+  Icon,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 import { DesktopSubNav } from "./DesktopSubNav";
 import { NavItems } from "../Utils/NavItems";
 
 export const DesktopNav = () => {
-  const linkColor =  "gray.200"
-  const linkHoverColor = "white"
-  const popoverContentBgColor =  "gray.800"
+  
 
   return (
     <Stack direction={"row"} spacing={4}>
@@ -31,21 +29,21 @@ export const DesktopNav = () => {
                 href={navItem.href ?? "#"}
                 fontSize={"sm"}
                 fontWeight={500}
-                color={linkColor}
+                color="gray.200"
                 _hover={{
                   textDecoration: "none",
-                  color: linkHoverColor,
+                  color: "white",
                 }}
               >
                 {navItem.label}
               </Link>
             </PopoverTrigger>
-
+            <Icon as={navItem.icon} />
             {navItem.children && (
               <PopoverContent
                 border={0}
                 boxShadow={"xl"}
-                bg={popoverContentBgColor}
+                bg="gray.800"
                 p={4}
                 rounded={"xl"}
                 minW={"sm"}

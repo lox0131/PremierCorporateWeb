@@ -1,19 +1,20 @@
 import { Flex, Text, Heading, Button, useMediaQuery } from "@chakra-ui/react";
 import "animate.css";
+import Footer from "../components/Footer";
 interface Props {}
 
-const DashBoard = (props: Props) => {
+const DashBoard: React.FC<Props> = () => {
   const [isLargerThan] = useMediaQuery("(min-width: 500px)");
   return (
-    <Flex minW="100vw" minH={isLargerThan ? "92vh" : "89vh"}bg="gray.900">
+    <Flex minW="100vw" minH={isLargerThan ? "91vh" : "89vh"} bg="gray.800" flexDirection="column" position="relative">
       <Flex
         w="100vw"
         h={isLargerThan ? "35vh" : "45vh"}
         justifyContent="center"
         alignItems="center"
         bgImage="Webp.net-resizeimage.jpg"
-        backgroundPosition="center"
-        backgroundSize="cover"
+        bgPos="center"
+        bgSize="cover"
         alt="Image"
       >
         <Flex
@@ -22,7 +23,7 @@ const DashBoard = (props: Props) => {
           className="animate__animated animate__fadeInUp"
         >
           <Heading color="white" textAlign="center" mb={3}>
-            Primier Corporate
+            Priemier Corporate
           </Heading>
           <Heading textAlign="center" mb={3} color="blue.400">
             Five Star Service
@@ -42,6 +43,7 @@ const DashBoard = (props: Props) => {
           </Button>
         </Flex>
       </Flex>
+      <Footer />
     </Flex>
   );
 };

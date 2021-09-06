@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <Flex
         bg="gray.900"
         color="white"
-        minH={isLargerThan ? "8vh" : "11vh"}
+        minH={isLargerThan ? "9vh" : "11vh"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
@@ -52,6 +52,7 @@ const Header: React.FC = () => {
               h="39px"
               src="http://www.premiercorporatelimo.com/img/logo.png"
               paddingLeft={isLargerThan ? "20px" : "0px"}
+              paddingRight={isLargerThan ? "0px" : "20px"}
             />
           </Link>
           <Flex
@@ -75,7 +76,7 @@ const Header: React.FC = () => {
             <Button
               fontSize={"sm"}
               fontWeight={600}
-              bg={isLargerThan ? "blue.600" : ""}
+              bg={isLargerThan ? "blue.400" : ""}
               color={"white"}
               href={"/signin"}
               _hover={{
