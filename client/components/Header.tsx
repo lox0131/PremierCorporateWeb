@@ -15,6 +15,7 @@ import {
   Avatar,
   MenuDivider,
   useDisclosure,
+  DarkMode
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import firebase from "../firebase/clientApp";
@@ -24,8 +25,8 @@ import { MobileNav } from "./MobileNav";
 import { DesktopNav } from "./DesktopNav";
 
 const Header: React.FC = () => {
-    const [isLargerThan] = useMediaQuery("(min-width: 500px)");
-     const [user] = useAuthState(firebase.auth());
+  const [isLargerThan] = useMediaQuery("(min-width: 500px)");
+  const [user] = useAuthState(firebase.auth());
 
   const { isOpen, onToggle } = useDisclosure();
   return (
@@ -60,8 +61,8 @@ const Header: React.FC = () => {
             <Image
               h="39px"
               src="http://www.premiercorporatelimo.com/img/logo.png"
-              paddingLeft={isLargerThan ? "20px" : "0px"}
-              paddingRight={isLargerThan ? "0px" : "20px"}
+              // paddingLeft={isLargerThan ? "20px" : "0px"}
+              // paddingRight={isLargerThan ? "0px" : "20px"}
             />
           </Link>
           <Flex
@@ -81,42 +82,44 @@ const Header: React.FC = () => {
           direction={"row"}
           spacing={6}
         >
-          <Menu>
-            <MenuButton
-              as={Button}
-              rounded={"full"}
-              variant={"link"}
-              cursor={"pointer"}
-              minW={0}
-            >
-              {user && user.photoURL ? (
-                <Avatar size={"md"} src={`${user?.photoURL}`} />
-              ) : (
-                <Avatar size={"md"} src={""} />
-              )}
-            </MenuButton>
-            <MenuList>
-              {user ? (
-                <>
-                  <Link href="/drinks">
-                    <MenuItem>View Reservations</MenuItem>
+          <DarkMode>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
+                {user && user.photoURL ? (
+                  <Avatar size={"md"} src={`${user?.photoURL}`} />
+                ) : (
+                  <Avatar size={"md"} src={""} />
+                )}
+              </MenuButton>
+              <MenuList>
+                {user ? (
+                  <>
+                    <Link href="/drinks">
+                      <MenuItem>View Reservations</MenuItem>
+                    </Link>
+                    <MenuDivider />
+                  </>
+                ) : (
+                  <> </>
+                )}
+                {!user ? (
+                  <Link href="/signin">
+                    <MenuItem>Log In</MenuItem>
                   </Link>
-                  <MenuDivider />
-                </>
-              ) : (
-                <> </>
-              )}
-              {!user ? (
-                <Link href="/signin">
-                  <MenuItem>Log In</MenuItem>
-                </Link>
-              ) : (
-                <MenuItem onClick={() => firebase.auth().signOut()}>
-                  Log Out
-                </MenuItem>
-              )}
-            </MenuList>
-          </Menu>
+                ) : (
+                  <MenuItem onClick={() => firebase.auth().signOut()}>
+                    Log Out
+                  </MenuItem>
+                )}
+              </MenuList>
+            </Menu>
+          </DarkMode>
         </Stack>
       </Flex>
 
@@ -125,6 +128,6 @@ const Header: React.FC = () => {
       </Collapse>
     </Box>
   );
-}
+};
 
-export default Header
+export default Header;
