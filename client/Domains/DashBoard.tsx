@@ -1,12 +1,10 @@
 import { Flex, Text, Heading, Button, useMediaQuery } from "@chakra-ui/react";
 import "animate.css";
-import Footer from "../components/Footer";
 interface Props {}
 
 const DashBoard: React.FC<Props> = () => {
-  const [isLargerThan] = useMediaQuery("(min-width: 500px)");
   return (
-    <Flex minW="100vw" minH={isLargerThan ? "91vh" : "89vh"} bg="gray.800" flexDirection="column" position="relative">
+    <Flex bg="gray.800" flexDirection="column" position="relative">
       <Flex
         w="100vw"
         h="45vh"
@@ -43,7 +41,6 @@ const DashBoard: React.FC<Props> = () => {
           </Button>
         </Flex>
       </Flex>
-      <Footer />
     </Flex>
   );
 };

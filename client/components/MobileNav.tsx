@@ -57,7 +57,7 @@ export const MobileNavItem: React.FC<INavItem> = ({ label, children, href }) => 
         )}
       </Flex>
 
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
+      <Collapse in={isOpen} animateOpacity >
         <Stack
           mt={2}
           pl={4}
