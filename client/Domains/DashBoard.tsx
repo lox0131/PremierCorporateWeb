@@ -6,7 +6,6 @@ const DashBoard: React.FC<Props> = () => {
   return (
     <Flex bg="gray.800" flexDirection="column" position="relative">
       <Flex
-        w="100vw"
         h="45vh"
         justifyContent="center"
         alignItems="center"

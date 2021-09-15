@@ -49,9 +49,6 @@ const Footer: React.FC = () => {
     <Box
       bg="gray.900"
       color="gray.200"
-      bottom="0px"
-      width="100vw"
-      position="fixed"
     >
       <Container
         as={Stack}
