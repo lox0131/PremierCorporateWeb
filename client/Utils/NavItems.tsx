@@ -12,8 +12,8 @@ export const NavItems: Array<INavItem> = [
     icon: icon1,
     children: [
       {
-        label: "Services",
-        subLabel: "Trending Design to inspire you",
+        label: "Airport Transporation",
+        subLabel: "Private coropate service",
         href: "#",
       },
       {
@@ -44,13 +44,13 @@ export const NavItems: Array<INavItem> = [
     icon: icon3,
     children: [
       {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
+        label: "Create a Reservation",
+        subLabel: "Schedule your luxury transportation",
         href: "#",
       },
       {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
+        label: "View/Update existing Reservations",
+        subLabel: "Modify any reservations",
         href: "#",
       },
     ],
