@@ -28,8 +28,8 @@ const SideBySide = (props: Props) => {
       >
         <Flex
           flexDirection={isLargerThan ? "row" : "column"}
-          padding="20px"
-          minW="60vw"
+          paddingTop="20px"
+          minW="55vw"
         >
           <Flex
             flexDirection="column"
@@ -37,7 +37,8 @@ const SideBySide = (props: Props) => {
             justifyContent="center"
             maxW="840px"
             alignItems="center"
-            mb={10}
+            mb={isLargerThan ? "20px" : "0px"}
+            paddingBottom="20px"
           >
             <Heading mb={2} textAlign="center">
               Airport Transporation
@@ -59,18 +60,22 @@ const SideBySide = (props: Props) => {
           <Image
             borderRadius="10px"
             height="300px"
-            w="200%"
+            w="250%"
             src="safwan-mahmud-6xQFm9TFwmk-unsplash.jpg"
             bgPos="center"
             bgSize="cover"
             alt="Image"
           />
         </Flex>
-        <Flex flexDirection={isLargerThan ? "row" : "column"} padding="20px" minW="60vw">
+        <Flex
+          flexDirection={isLargerThan ? "row" : "column"}
+          paddingTop="20px"
+          minW="55vw"
+        >
           <Image
             borderRadius="10px"
             height="300px"
-            w="200%"
+            w="250%"
             src="safwan-mahmud-6xQFm9TFwmk-unsplash.jpg"
             bgPos="center"
             bgSize="cover"
@@ -82,7 +87,7 @@ const SideBySide = (props: Props) => {
             paddingLeft={isLargerThan ? "60px" : "0px"}
             justifyContent="center"
             alignItems="center"
-            mb={10}
+            mt={10}
           >
             <Heading mb={2} textAlign="center">
               Airport Transporation
@@ -97,11 +102,17 @@ const SideBySide = (props: Props) => {
               transportation service needs. Empire Limousine will answer any
               questions you may have.
             </Text>
-            <Button mt={10} colorScheme="blue" justifyContent="center">
+            <Button
+              mt={10}
+              mb={isLargerThan ? "20" : "0"}
+              colorScheme="blue"
+              justifyContent="center"
+            >
               Learn More
             </Button>
           </Flex>
         </Flex>
+        <Divider></Divider>
       </Flex>
     </>
   );
