@@ -26,12 +26,16 @@ const SideBySide = (props: Props) => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Flex flexDirection={isLargerThan ? "row" : "column"} padding="20px">
+        <Flex
+          flexDirection={isLargerThan ? "row" : "column"}
+          padding="20px"
+          minW="60vw"
+        >
           <Flex
             flexDirection="column"
-            maxW="840px"
             paddingRight={isLargerThan ? "60px" : "0px"}
             justifyContent="center"
+            maxW="840px"
             alignItems="center"
             mb={10}
           >
@@ -62,7 +66,7 @@ const SideBySide = (props: Props) => {
             alt="Image"
           />
         </Flex>
-        <Flex flexDirection={isLargerThan ? "row" : "column"} padding="20px">
+        <Flex flexDirection={isLargerThan ? "row" : "column"} padding="20px" minW="60vw">
           <Image
             borderRadius="10px"
             height="300px"
