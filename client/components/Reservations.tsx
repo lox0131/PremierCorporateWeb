@@ -21,7 +21,7 @@ const Reservations: React.FC = () => {
         color="white"
         justifyContent="center"
       >
-          <Flex w="90%" maxW="60%" h="70%" backgroundColor="red">fdgfd</Flex>
+          <Flex w="60%"  h="70%" backgroundColor="red">fdgfd</Flex>
       </Flex>
     </>
   );
