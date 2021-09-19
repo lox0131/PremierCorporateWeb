@@ -61,6 +61,7 @@ const Header: React.FC = () => {
             <Image
               h="39px"
               src="http://www.premiercorporatelimo.com/img/logo.png"
+              alt=""
               // paddingLeft={isLargerThan ? "20px" : "0px"}
               // paddingRight={isLargerThan ? "0px" : "20px"}
             />
@@ -100,7 +101,7 @@ const Header: React.FC = () => {
               <MenuList>
                 {user ? (
                   <>
-                    <Link href="/drinks">
+                    <Link href="/reversation">
                       <MenuItem>View Reservations</MenuItem>
                     </Link>
                     <MenuDivider />
