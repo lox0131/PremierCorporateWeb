@@ -1,17 +1,7 @@
 import {
   Heading,
-  VStack,
-  chakra,
   Box,
-  GridItem,
-  Button,
-  Stack,
-  Center,
   Flex,
-  Icon,
-  SimpleGrid,
-  DarkMode,
-  Input,
 } from "@chakra-ui/react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "../firebase/clientApp";
