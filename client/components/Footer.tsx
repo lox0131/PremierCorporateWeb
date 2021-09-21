@@ -5,7 +5,6 @@ import {
   Stack,
   Text,
   Image,
-  useMediaQuery,
   VisuallyHidden,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
@@ -44,7 +43,6 @@ const SocialButton = ({
 };
 
 const Footer: React.FC = () => {
-  const [isLargerThan] = useMediaQuery("(min-width: 500px)");
   return (
     <Box
       bg="gray.900"
@@ -59,13 +57,11 @@ const Footer: React.FC = () => {
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
-        {isLargerThan && (
           <Image
             h="39px"
             src="http://www.premiercorporatelimo.com/img/logo.png"
             alt="img"
           />
-        )}
         <Text>© 2021 Premier Corp. All rights reserved</Text>
         <Stack direction={"row"} spacing={6}>
           <SocialButton label={"Twitter"} href={"#"}>

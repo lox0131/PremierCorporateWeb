@@ -7,11 +7,18 @@ import {
   Divider,
   Button,
 } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
 
 interface Props {}
 
 const SideBySide = (props: Props) => {
+  const [isMinWidthMedium, setIsMinWidthMedium] = useState(false);
   const [isLargerThan] = useMediaQuery("(min-width: 800px)");
+  useEffect(() => {
+    if (isLargerThan !== isMinWidthMedium) {
+      setIsMinWidthMedium(isLargerThan);
+    }
+  }, [isLargerThan]);
   return (
     <>
       <Heading padding="40px" textAlign="center" bg="gray.800" color="white">
@@ -27,17 +34,17 @@ const SideBySide = (props: Props) => {
         justifyContent="space-between"
       >
         <Flex
-          flexDirection={isLargerThan ? "row" : "column"}
+          flexDirection={isMinWidthMedium ? "row" : "column"}
           paddingTop="20px"
           minW="55vw"
         >
           <Flex
             flexDirection="column"
-            paddingRight={isLargerThan ? "60px" : "0px"}
+            paddingRight={isMinWidthMedium ? "60px" : "0px"}
             justifyContent="center"
             maxW="840px"
             alignItems="center"
-            mb={isLargerThan ? "20px" : "0px"}
+            mb={isMinWidthMedium ? "20px" : "0px"}
             paddingBottom="20px"
           >
             <Heading mb={2} textAlign="center">
@@ -68,7 +75,7 @@ const SideBySide = (props: Props) => {
           />
         </Flex>
         <Flex
-          flexDirection={isLargerThan ? "row" : "column"}
+          flexDirection={isMinWidthMedium ? "row" : "column"}
           paddingTop="20px"
           minW="55vw"
         >
@@ -84,7 +91,7 @@ const SideBySide = (props: Props) => {
           <Flex
             flexDirection="column"
             maxW="840px"
-            paddingLeft={isLargerThan ? "60px" : "0px"}
+            paddingLeft={isMinWidthMedium ? "60px" : "0px"}
             justifyContent="center"
             alignItems="center"
             mt={10}
@@ -104,7 +111,7 @@ const SideBySide = (props: Props) => {
             </Text>
             <Button
               mt={10}
-              mb={isLargerThan ? "20" : "0"}
+              mb={isMinWidthMedium ? "20" : "0"}
               colorScheme="blue"
               justifyContent="center"
             >

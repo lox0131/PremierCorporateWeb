@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  useMediaQuery,
   Image,
   IconButton,
   Button,
@@ -25,7 +24,6 @@ import { MobileNav } from "./MobileNav";
 import { DesktopNav } from "./DesktopNav";
 
 const Header: React.FC = () => {
-  const [isLargerThan] = useMediaQuery("(min-width: 500px)");
   const [user] = useAuthState(firebase.auth());
 
   const { isOpen, onToggle } = useDisclosure();
@@ -34,7 +32,7 @@ const Header: React.FC = () => {
       <Flex
         bg="gray.900"
         color="white"
-        minH={isLargerThan ? "9vh" : "11vh"}
+        minH="9vh"
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}

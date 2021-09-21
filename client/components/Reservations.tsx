@@ -6,9 +6,19 @@ import {
   FormErrorMessage,
   FormHelperText,
   Input,
+  useMediaQuery,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const Reservations: React.FC = () => {
+  const [isMinWidthMedium, setIsMinWidthMedium] = useState(false);
+  const [isLargerThan] = useMediaQuery("(min-width: 800px)");
+  useEffect(() => {
+    if (isLargerThan !== isMinWidthMedium) {
+      setIsMinWidthMedium(isLargerThan);
+    }
+  }, [isLargerThan]);
+
   return (
     <>
       <Heading
@@ -28,17 +38,27 @@ const Reservations: React.FC = () => {
         color="white"
         justifyContent="center"
       >
-        <Flex w="70%" minW="325px" h="70%" backgroundColor="red">
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" />
-            <FormHelperText>jnjn</FormHelperText>
-          </FormControl>
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" />
-            <FormHelperText>jnjn</FormHelperText>
-          </FormControl>
+        <Flex
+          w="60%"
+          minW="325px"
+          h="70%"
+          borderWidth="1px"
+          boxShadow="2xl"
+          borderRadius="20px"
+          flexDirection={isMinWidthMedium ? "row" : "column"}
+        >
+          <Flex w={isMinWidthMedium ? "50%" : "100%"}>
+            <FormControl id="email" padding="20px">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" />
+            </FormControl>
+          </Flex>
+          <Flex w={isMinWidthMedium ? "50%" : "100%"}>
+            <FormControl id="email" padding="20px">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" />
+            </FormControl>
+          </Flex>
         </Flex>
       </Flex>
     </>
