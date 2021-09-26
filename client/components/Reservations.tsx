@@ -3,21 +3,35 @@ import {
   Heading,
   FormControl,
   FormLabel,
-  DarkMode,
+  Select,
+  Button,
   Input,
+  DarkMode,
+  InputLeftAddon,
+  InputGroup,
   useMediaQuery,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 import { useEffect, useState } from "react";
 
 const Reservations: React.FC = () => {
   const [isMinWidthMedium, setIsMinWidthMedium] = useState(false);
-  const [isLargerThan] = useMediaQuery("(min-width: 800px)");
+  const [isLargerThan] = useMediaQuery("(min-width: 950px)");
+  const [address, setAddress] = useState("");
   useEffect(() => {
     if (isLargerThan !== isMinWidthMedium) {
       setIsMinWidthMedium(isLargerThan);
     }
   }, [isLargerThan]);
-
+  const handleSelect = async (value: any) => {};
   return (
     <>
       <Heading
@@ -27,13 +41,12 @@ const Reservations: React.FC = () => {
         bg="gray.800"
         color="white"
         padding="40px"
-        paddingBottom={20}
       >
         Reservation Form
       </Heading>
       <Flex
         w="100%"
-        minH="75vh"
+        minH="80vh"
         bg="gray.800"
         color="white"
         justifyContent="center"
@@ -50,48 +63,98 @@ const Reservations: React.FC = () => {
           flexDirection={isMinWidthMedium ? "row" : "column"}
         >
           <Flex w={isMinWidthMedium ? "50%" : "100%"} flexDirection="column">
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="date" color="white" />
-            </FormControl>
-            <FormControl id="date" padding="20px">
-              <FormLabel>date address</FormLabel>
-              <Input type="date" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
+            <form>
+              <FormControl id="email" padding="20px">
+                <FormLabel>Select Service Type</FormLabel>
+                <DarkMode>
+                  <Select>
+                    <option>From Airport</option>
+                    <option>Point-to-Point</option>
+                    <option>Hourly</option>
+                  </Select>
+                </DarkMode>
+              </FormControl>
+              <Flex flexDirection={isMinWidthMedium ? "row" : "column"}>
+                <FormControl
+                  id="date"
+                  padding="20px"
+                  w={isMinWidthMedium ? "60%" : "100%"}
+                >
+                  <FormLabel>Pick-Up Date</FormLabel>
+                  <Input type="date" />
+                </FormControl>
+                <FormControl
+                  id="email"
+                  padding="20px"
+                  w={isMinWidthMedium ? "40%" : "100%"}
+                >
+                  <FormLabel>Pick-Up Time</FormLabel>
+                  <Input type="time" />
+                </FormControl>
+              </Flex>
+              <FormControl id="email" padding="20px">
+                <PlacesAutocomplete
+                  value={address}
+                  onChange={setAddress}
+                  onSelect={handleSelect}
+                >
+                  {() => (
+                    <>
+                      <FormLabel>Pick Up Location</FormLabel>
+                      <Input type="email" placeholder="Your pick-up location" />
+                    </>
+                  )}
+                </PlacesAutocomplete>
+              </FormControl>
+              <FormControl id="time" padding="20px">
+                <FormLabel>Drop Off Location</FormLabel>
+                <Input type="email" placeholder="Your drop-up location" />
+              </FormControl>
+            </form>
           </Flex>
           <Flex w={isMinWidthMedium ? "50%" : "100%"} flexDirection="column">
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="email" padding="20px">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
+            <form>
+              <Flex flexDirection={isMinWidthMedium ? "row" : "column"}>
+                <FormControl padding="20px">
+                  <FormLabel>First Name</FormLabel>
+                  <Input type="name" />
+                </FormControl>
+                <FormControl id="email" padding="20px">
+                  <FormLabel>Last Name</FormLabel>
+                  <Input type="name" />
+                </FormControl>
+              </Flex>
+              <FormControl id="email" padding="20px">
+                <FormLabel>Email address</FormLabel>
+                <Input type="email" />
+              </FormControl>
+              <FormControl padding="20px">
+                <FormLabel>Phone Number</FormLabel>
+                <DarkMode>
+                  <InputGroup>
+                    <InputLeftAddon children="+234" />
+                    <Input type="tel" placeholder="Phone Number" />
+                  </InputGroup>
+                </DarkMode>
+              </FormControl>
+              <FormControl id="email" padding="20px">
+                <FormLabel>Number of Passengers</FormLabel>
+                <NumberInput>
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </FormControl>
+              <Button
+                w="50%"
+                mb={10}
+                mt={10}
+                ml={5}
+                colorScheme="facebook"
+              ></Button>
+            </form>
           </Flex>
         </Flex>
       </Flex>
