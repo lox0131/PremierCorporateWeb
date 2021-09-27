@@ -20,18 +20,26 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import { TiLocationArrow, TiLocationArrowOutline } from "react-icons/ti";
 import { useEffect, useState } from "react";
 
 const Reservations: React.FC = () => {
   const [isMinWidthMedium, setIsMinWidthMedium] = useState(false);
   const [isLargerThan] = useMediaQuery("(min-width: 950px)");
   const [address, setAddress] = useState("");
+  const [address1, setAddress1] = useState("");
   useEffect(() => {
     if (isLargerThan !== isMinWidthMedium) {
       setIsMinWidthMedium(isLargerThan);
     }
   }, [isLargerThan]);
-  const handleSelect = async (value: any) => {};
+  
+  const handleSelect = async (value: any) => {
+     setAddress(value);
+  };
+  const handleSelect1 = async (value: any) => {
+    setAddress1(value);
+  };
   return (
     <>
       <Heading
@@ -92,23 +100,85 @@ const Reservations: React.FC = () => {
                   <Input type="time" />
                 </FormControl>
               </Flex>
-              <FormControl id="email" padding="20px">
+              <FormControl padding="20px">
                 <PlacesAutocomplete
                   value={address}
                   onChange={setAddress}
                   onSelect={handleSelect}
                 >
-                  {() => (
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
                     <>
                       <FormLabel>Pick Up Location</FormLabel>
-                      <Input type="email" placeholder="Your pick-up location" />
+                      <Input
+                        {...getInputProps({
+                          placeholder: "Your pick-up location",
+                        })}
+                      />
+                      <Flex flexDirection="column">
+                        {loading ? <Flex>loading</Flex> : null}
+                        {suggestions.map((suggestion, idx) => {
+                          return (
+                            <DarkMode key={idx}>
+                              <Select
+                                variant="filled"
+                                padding="2px"
+                                icon={<TiLocationArrow />}
+                                {...getSuggestionItemProps(suggestion)}
+                              >
+                                <option>{suggestion.description}</option>
+                              </Select>
+                            </DarkMode>
+                          );
+                        })}
+                      </Flex>
                     </>
                   )}
                 </PlacesAutocomplete>
               </FormControl>
-              <FormControl id="time" padding="20px">
-                <FormLabel>Drop Off Location</FormLabel>
-                <Input type="email" placeholder="Your drop-up location" />
+              <FormControl padding="20px">
+                <PlacesAutocomplete
+                  value={address1}
+                  onChange={setAddress1}
+                  onSelect={handleSelect1}
+                >
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <>
+                      <FormLabel>Drop Off Location</FormLabel>
+                      <Input
+                        {...getInputProps({
+                          placeholder: "Your drop-off location",
+                        })}
+                      />
+                      <Flex flexDirection="column">
+                        {loading ? <Flex>loading</Flex> : null}
+                        {suggestions.map((suggestion, idx) => {
+                          return (
+                            <DarkMode key={idx}>
+                              <Select
+                                variant="filled"
+                                padding="2px"
+                                icon={<TiLocationArrowOutline />}
+                                {...getSuggestionItemProps(suggestion)}
+                              >
+                                <option>{suggestion.description}</option>
+                              </Select>
+                            </DarkMode>
+                          );
+                        })}
+                      </Flex>
+                    </>
+                  )}
+                </PlacesAutocomplete>
               </FormControl>
             </form>
           </Flex>
@@ -148,12 +218,12 @@ const Reservations: React.FC = () => {
                 </NumberInput>
               </FormControl>
               <Button
-                w="50%"
+                w="30%"
                 mb={10}
                 mt={10}
                 ml={5}
                 colorScheme="facebook"
-              ></Button>
+              >Reserve</Button>
             </form>
           </Flex>
         </Flex>
