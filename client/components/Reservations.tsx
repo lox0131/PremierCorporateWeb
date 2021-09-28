@@ -16,10 +16,7 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
 } from "@chakra-ui/react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
+import PlacesAutocomplete from "react-places-autocomplete";
 import { TiLocationArrow, TiLocationArrowOutline } from "react-icons/ti";
 import { useEffect, useState } from "react";
 
@@ -189,7 +186,7 @@ const Reservations: React.FC = () => {
                   <FormLabel>First Name</FormLabel>
                   <Input type="name" />
                 </FormControl>
-                <FormControl id="email" padding="20px">
+                <FormControl padding="20px">
                   <FormLabel>Last Name</FormLabel>
                   <Input type="name" />
                 </FormControl>
@@ -202,7 +199,7 @@ const Reservations: React.FC = () => {
                 <FormLabel>Phone Number</FormLabel>
                 <DarkMode>
                   <InputGroup>
-                    <InputLeftAddon children="+234" />
+                    <InputLeftAddon children="+1" />
                     <Input type="tel" placeholder="Phone Number" />
                   </InputGroup>
                 </DarkMode>
@@ -219,8 +216,8 @@ const Reservations: React.FC = () => {
               </FormControl>
               <Button
                 w="30%"
-                mb={10}
-                mt={10}
+                mb={7}
+                mt={7}
                 ml={5}
                 colorScheme="facebook"
               >Reserve</Button>

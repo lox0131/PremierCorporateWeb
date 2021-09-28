@@ -8,7 +8,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <Head>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxSxBZ8ABuZzYzwcHsar6e0xYk3OAT_Q4&libraries=places"></script>
+        <script
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GoogleAPIKEY}&libraries=places`}
+        ></script>
       </Head>
       <Component {...pageProps} />
     </ChakraProvider>
