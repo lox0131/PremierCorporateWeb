@@ -18,24 +18,52 @@ import {
 } from "@chakra-ui/react";
 import PlacesAutocomplete from "react-places-autocomplete";
 import { TiLocationArrow, TiLocationArrowOutline } from "react-icons/ti";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Reservations: React.FC = () => {
   const [isMinWidthMedium, setIsMinWidthMedium] = useState(false);
   const [isLargerThan] = useMediaQuery("(min-width: 950px)");
   const [address, setAddress] = useState("");
   const [address1, setAddress1] = useState("");
+  const [formData, setFormData] = useState<any>({
+    service: "",
+    pick_up_date: "",
+    pick_up_time: "",
+    address_pick: "",
+    address_drop: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone_number: "",
+    passengers: 0,
+  });
   useEffect(() => {
     if (isLargerThan !== isMinWidthMedium) {
       setIsMinWidthMedium(isLargerThan);
     }
   }, [isLargerThan]);
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+  };
   
+   const handleChange = (
+     e:
+       | React.ChangeEvent<HTMLInputElement>
+       | React.ChangeEvent<HTMLSelectElement>
+   ) => {
+     e.preventDefault();
+     setFormData({
+       ...formData,
+       [e.currentTarget.name]: e.currentTarget.value,
+     });
+   };
+
   const handleSelect = async (value: any) => {
-     setAddress(value);
+    setFormData({ ...formData, address_pick: value });
   };
   const handleSelect1 = async (value: any) => {
-    setAddress1(value);
+     setFormData({ ...formData, address_drop: value });
   };
   return (
     <>
@@ -72,7 +100,7 @@ const Reservations: React.FC = () => {
               <FormControl id="email" padding="20px">
                 <FormLabel>Select Service Type</FormLabel>
                 <DarkMode>
-                  <Select>
+                  <Select name="service" value={formData.service || ""}>
                     <option>From Airport</option>
                     <option>Point-to-Point</option>
                     <option>Hourly</option>
@@ -86,7 +114,11 @@ const Reservations: React.FC = () => {
                   w={isMinWidthMedium ? "60%" : "100%"}
                 >
                   <FormLabel>Pick-Up Date</FormLabel>
-                  <Input type="date" />
+                  <Input
+                    name="pick_up_date"
+                    value={formData.pick_up_date || ""}
+                    type="date"
+                  />
                 </FormControl>
                 <FormControl
                   id="email"
@@ -94,12 +126,16 @@ const Reservations: React.FC = () => {
                   w={isMinWidthMedium ? "40%" : "100%"}
                 >
                   <FormLabel>Pick-Up Time</FormLabel>
-                  <Input type="time" />
+                  <Input
+                    name="pick_up_time"
+                    value={formData.pick_up_time || ""}
+                    type="time"
+                  />
                 </FormControl>
               </Flex>
               <FormControl padding="20px">
                 <PlacesAutocomplete
-                  value={address}
+                  value={formData.address_pick || ""}
                   onChange={setAddress}
                   onSelect={handleSelect}
                 >
@@ -112,6 +148,7 @@ const Reservations: React.FC = () => {
                     <>
                       <FormLabel>Pick Up Location</FormLabel>
                       <Input
+                        name="pick_up_location"
                         {...getInputProps({
                           placeholder: "Your pick-up location",
                         })}
@@ -139,7 +176,7 @@ const Reservations: React.FC = () => {
               </FormControl>
               <FormControl padding="20px">
                 <PlacesAutocomplete
-                  value={address1}
+                  value={formData.address_drop || ""}
                   onChange={setAddress1}
                   onSelect={handleSelect1}
                 >
@@ -184,43 +221,52 @@ const Reservations: React.FC = () => {
               <Flex flexDirection={isMinWidthMedium ? "row" : "column"}>
                 <FormControl padding="20px">
                   <FormLabel>First Name</FormLabel>
-                  <Input type="name" />
+                  <Input
+                    name="name"
+                    value={formData.firstname || ""}
+                    type="name"
+                  />
                 </FormControl>
                 <FormControl padding="20px">
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="name" />
+                  <Input
+                    name="lastname"
+                    value={formData.lastname || ""}
+                    type="name"
+                  />
                 </FormControl>
               </Flex>
               <FormControl id="email" padding="20px">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input value={formData.email || ""} name="email" type="email" />
               </FormControl>
               <FormControl padding="20px">
                 <FormLabel>Phone Number</FormLabel>
                 <DarkMode>
                   <InputGroup>
                     <InputLeftAddon children="+1" />
-                    <Input type="tel" placeholder="Phone Number" />
+                    <Input
+                      value={formData.phone_number || ""}
+                      name="phone_number"
+                      type="tel"
+                      placeholder="Phone Number"
+                    />
                   </InputGroup>
                 </DarkMode>
               </FormControl>
-              <FormControl id="email" padding="20px">
+              <FormControl padding="20px">
                 <FormLabel>Number of Passengers</FormLabel>
                 <NumberInput>
-                  <NumberInputField />
+                  <NumberInputField value={formData.passengers || 0} name="passengers" />
                   <NumberInputStepper>
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
                   </NumberInputStepper>
                 </NumberInput>
               </FormControl>
-              <Button
-                w="30%"
-                mb={7}
-                mt={7}
-                ml={5}
-                colorScheme="facebook"
-              >Reserve</Button>
+              <Button w="30%" mb={7} mt={7} ml={5} colorScheme="facebook">
+                Reserve
+              </Button>
             </form>
           </Flex>
         </Flex>
