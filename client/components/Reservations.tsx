@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import {
   Flex,
   Heading,
@@ -29,8 +30,8 @@ const Reservations: React.FC = () => {
     service: "",
     pick_up_date: "",
     pick_up_time: "",
-    address_pick: "",
-    address_drop: "",
+    address_pick: address,
+    address_drop: address1,
     firstname: "",
     lastname: "",
     email: "",
@@ -46,24 +47,21 @@ const Reservations: React.FC = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
   };
-  
-   const handleChange = (
-     e:
-       | React.ChangeEvent<HTMLInputElement>
-       | React.ChangeEvent<HTMLSelectElement>
-   ) => {
-     e.preventDefault();
-     setFormData({
-       ...formData,
-       [e.currentTarget.name]: e.currentTarget.value,
-     });
-   };
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    setFormData({
+      ...formData,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+    console.log(formData)
+  };
 
   const handleSelect = async (value: any) => {
-    setFormData({ ...formData, address_pick: value });
+    setAddress(value);
   };
   const handleSelect1 = async (value: any) => {
-     setFormData({ ...formData, address_drop: value });
+    setAddress1(value);
   };
   return (
     <>
@@ -96,11 +94,15 @@ const Reservations: React.FC = () => {
           flexDirection={isMinWidthMedium ? "row" : "column"}
         >
           <Flex w={isMinWidthMedium ? "50%" : "100%"} flexDirection="column">
-            <form>
+            <form onSubmit={handleSubmit}>
               <FormControl id="email" padding="20px">
                 <FormLabel>Select Service Type</FormLabel>
                 <DarkMode>
-                  <Select name="service" value={formData.service || ""}>
+                  <Select
+                    name="service"
+                    onChange={handleChange}
+                    value={formData.service || ""}
+                  >
                     <option>From Airport</option>
                     <option>Point-to-Point</option>
                     <option>Hourly</option>
@@ -116,6 +118,7 @@ const Reservations: React.FC = () => {
                   <FormLabel>Pick-Up Date</FormLabel>
                   <Input
                     name="pick_up_date"
+                    onChange={handleChange}
                     value={formData.pick_up_date || ""}
                     type="date"
                   />
@@ -128,6 +131,7 @@ const Reservations: React.FC = () => {
                   <FormLabel>Pick-Up Time</FormLabel>
                   <Input
                     name="pick_up_time"
+                    onChange={handleChange}
                     value={formData.pick_up_time || ""}
                     type="time"
                   />
@@ -135,7 +139,7 @@ const Reservations: React.FC = () => {
               </Flex>
               <FormControl padding="20px">
                 <PlacesAutocomplete
-                  value={formData.address_pick || ""}
+                  value={address}
                   onChange={setAddress}
                   onSelect={handleSelect}
                 >
@@ -176,9 +180,9 @@ const Reservations: React.FC = () => {
               </FormControl>
               <FormControl padding="20px">
                 <PlacesAutocomplete
-                  value={formData.address_drop || ""}
-                  onChange={setAddress1}
-                  onSelect={handleSelect1}
+                 value={address1}
+                 onChange={setAddress1}
+                 onSelect={handleSelect1}
                 >
                   {({
                     getInputProps,
@@ -222,7 +226,8 @@ const Reservations: React.FC = () => {
                 <FormControl padding="20px">
                   <FormLabel>First Name</FormLabel>
                   <Input
-                    name="name"
+                    name="firstname"
+                    onChange={handleChange}
                     value={formData.firstname || ""}
                     type="name"
                   />
@@ -230,6 +235,7 @@ const Reservations: React.FC = () => {
                 <FormControl padding="20px">
                   <FormLabel>Last Name</FormLabel>
                   <Input
+                    onChange={handleChange}
                     name="lastname"
                     value={formData.lastname || ""}
                     type="name"
@@ -238,7 +244,12 @@ const Reservations: React.FC = () => {
               </Flex>
               <FormControl id="email" padding="20px">
                 <FormLabel>Email address</FormLabel>
-                <Input value={formData.email || ""} name="email" type="email" />
+                <Input
+                  onChange={handleChange}
+                  value={formData.email || ""}
+                  name="email"
+                  type="email"
+                />
               </FormControl>
               <FormControl padding="20px">
                 <FormLabel>Phone Number</FormLabel>
@@ -246,6 +257,7 @@ const Reservations: React.FC = () => {
                   <InputGroup>
                     <InputLeftAddon children="+1" />
                     <Input
+                      onChange={handleChange}
                       value={formData.phone_number || ""}
                       name="phone_number"
                       type="tel"
@@ -257,8 +269,11 @@ const Reservations: React.FC = () => {
               <FormControl padding="20px">
                 <FormLabel>Number of Passengers</FormLabel>
                 <NumberInput>
-                  <NumberInputField value={formData.passengers || 0} name="passengers" />
-                  <NumberInputStepper>
+                  <NumberInputField
+                  />
+                  <NumberInputStepper     onChange={handleChange}
+                    value={formData.passengers}
+                    name="passengers">
                     <NumberIncrementStepper />
                     <NumberDecrementStepper />
                   </NumberInputStepper>
